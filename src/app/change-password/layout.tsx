@@ -2,12 +2,12 @@ import { generateStaticMetadata } from "@/lib/Metadata";
 import { Metadata } from "next";
 
 export const metadata: Metadata = generateStaticMetadata({
-    pageTitle: "Dashboard",
-    description: "The dashboard page allows a user to view basic information and update them",
-    keywords: ["Dashboard", "Home", "View", "SMS", "Messages"],
+    pageTitle: "Settings",
+    description: "The settings page allows a user to change password",
+    keywords: ["Settings", "Password", "Change", "SMS", "Messages"],
 })
 
-const DashboardLayout = (props: {
+const SettingsLayout = (props: {
     children: React.ReactNode;
 }) =>
 {
@@ -18,4 +18,4 @@ const DashboardLayout = (props: {
     );
 }
 
-export default DashboardLayout;
+export default SettingsLayout;

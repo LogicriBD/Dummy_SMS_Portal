@@ -1,4 +1,6 @@
+import { changePasswordReducer } from '@/features/dashboard/context/change-password.slice'
 import { loginReducer } from '@/features/login/context/login.slice'
+import { messageReducer } from '@/features/messages/context/message.slice'
 import { registrationReducer } from '@/features/registration/context/registration.slice'
 import { resetReducer } from '@/features/reset/context/reset.slice'
 import { verificationReducer } from '@/features/verify/context/verify.slice'
@@ -10,7 +12,9 @@ const appReducer = combineReducers({
   login: loginReducer,
   registration: registrationReducer,
   verifyEmail: verificationReducer,
-  reset: resetReducer
+  reset: resetReducer,
+  changePassword: changePasswordReducer,
+  message: messageReducer
 })
 
 export const appStore = configureStore({

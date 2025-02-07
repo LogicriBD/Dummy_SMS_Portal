@@ -11,19 +11,20 @@ export const useLogin = () => {
   const login = useAppSelector(state => state.login)
   const router = useRouter()
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault()
-      setIsLoading(true) // show loading animation to user
+      setIsLoading(true)
       const validatedPayload = loginValidator(login)
       const isSuccess = await loginWithCredentials({
         username: validatedPayload.email,
         password: validatedPayload.password,
       })
-      toast.success('Logged In Successfully')
       if (isSuccess) {
-        router.push('/')
+        router.refresh()
+        router.push('/dashboard')
       }
+      toast.success('Logged In Successfully')
     } catch (error: any) {
       if (error?.response.request.status === 401) {
         toast.error('Please Verify Your Email First')

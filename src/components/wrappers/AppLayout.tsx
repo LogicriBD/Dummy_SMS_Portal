@@ -7,6 +7,7 @@ import { Slide, ToastContainer } from 'react-toastify'
 import { usePathname } from 'next/navigation'
 import { publicRoutes } from '@/config/data/route'
 import StoreProvider from './StoreProvider'
+import Navbar from './Navbar'
 
 function AppLayout({ children }: { children: React.ReactNode })
 {
@@ -24,9 +25,9 @@ function AppLayout({ children }: { children: React.ReactNode })
           autoClose={3000}
           theme="colored"
           newestOnTop
-        //hideProgressBar
         />
         <StoreProvider>
+          <Navbar />
           {children}
         </StoreProvider>
       </QueryProvider>

@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
-import { apiClient } from '@/lib/ApiClient'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
+import { useJWTAuthContext } from '@/config/auth/auth'
 
 export type ResetVerificationResponse = {
   resetPasswordToken: {
@@ -17,6 +17,8 @@ export type ResetVerificationRequest = {
 
 export const useResetVerification = () => {
   const router = useRouter()
+  const { apiClient } = useJWTAuthContext()
+
   return useMutation({
     mutationKey: ['auth-reset-verification'],
     async mutationFn(payload: ResetVerificationRequest) {
@@ -24,10 +26,7 @@ export const useResetVerification = () => {
         if (payload.otp.length !== 6) {
           throw new Error('Invalid OTP, must be 6 digits')
         }
-        const data = await apiClient.post<ResetVerificationRequest, ResetVerificationResponse>(
-          '/auth/reset-password-verification',
-          payload
-        )
+        const { data } = await apiClient().post('/auth/reset-password-verification', payload)
         toast.success('Reset Password Successfully Verified')
         localStorage.setItem('resetPasswordToken', data.resetPasswordToken.token)
         router.push('/reset/update')

@@ -13,7 +13,7 @@ const MessagesLayout = (props: {
 }) =>
 {
     return (
-        <div className="w-full h-full max-h-screen flex justify-center items-center">
+        <div className="w-full max-h-full min-h-screen flex justify-start items-start">
             {props.children}
         </div>
     );

@@ -17,7 +17,7 @@ const LoginPage = () =>
     const { isLoading, onSubmit } = useLogin();
     return (
         <div className="w-full min-h-screen flex justify-center items-center">
-            <Card className="w-fit h-fit bg-slate-100 p-4">
+            <Card className="w-fit h-fit lg:mt-0 mt-24 bg-slate-100 p-4">
                 <CardHeader className="flex justify-center items-center">
                     <Image src="/logo.svg" alt="Logo" className="w-16 h-24 rounded-full" width={1000} height={1000} />
                 </CardHeader>

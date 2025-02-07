@@ -1,14 +1,24 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { isAuthenticatedRequest } from 'next-jwt-auth'
-import { publicRoutes } from '@/config/data/route'
+import { unProtectedRoutes, publicRoutes } from '@/config/data/route'
 
 export default function middleware(request: NextRequest) {
-  const isUnprotectedRoute = publicRoutes.includes(request.nextUrl.pathname)
+  const isUnprotectedRoute = unProtectedRoutes.includes(request.nextUrl.pathname)
+  const isPublicRoute = publicRoutes.includes(request.nextUrl.pathname)
+
+  if (isPublicRoute) {
+    return NextResponse.next()
+  }
 
   if (!isUnprotectedRoute && !isAuthenticatedRequest(request)) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
+
+  if (isUnprotectedRoute && isAuthenticatedRequest(request)) {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
+  }
+  
 
   return NextResponse.next()
 }

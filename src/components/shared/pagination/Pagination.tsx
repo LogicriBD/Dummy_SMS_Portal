@@ -1,4 +1,4 @@
-import { DOTS, usePagination } from '@/hooks/utils/usePagination'
+import { DOTS, usePagination } from '@/hooks/usePagination'
 import { HTMLAttributes } from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { twMerge } from 'tailwind-merge'
@@ -9,7 +9,8 @@ export type PaginationProps = {
   onPageChange: (page: number) => void
 } & HTMLAttributes<HTMLDivElement>
 
-export default function Pagination(props: PaginationProps) {
+export default function Pagination(props: PaginationProps)
+{
   const paginationRange = usePagination({
     page: props.list.page,
     limit: props.list.limit,
@@ -18,15 +19,18 @@ export default function Pagination(props: PaginationProps) {
   const lastPage = paginationRange[paginationRange.length - 1]
 
   // If there are less than 2 times in pagination range we shall not render the component
-  if (props.list.page === 0 || paginationRange.length < 2) {
+  if (props.list.page === 0 || paginationRange.length < 2)
+  {
     return null
   }
 
-  const onNext = () => {
+  const onNext = () =>
+  {
     props.onPageChange(Math.min(props.list.page + 1, lastPage))
   }
 
-  const onPrevious = () => {
+  const onPrevious = () =>
+  {
     props.onPageChange(Math.max(props.list.page - 1, 1))
   }
 
@@ -49,9 +53,11 @@ export default function Pagination(props: PaginationProps) {
       <li className={twMerge(itemClass, arrowClass, props.list.page === 1 ? disabledClass : '')} onClick={onPrevious}>
         <FiChevronLeft size={iconSize} />
       </li>
-      {paginationRange.map((pageNumber, i) => {
+      {paginationRange.map((pageNumber, i) =>
+      {
         // If the pageItem is a DOT, render the DOTS unicode character
-        if (pageNumber === DOTS) {
+        if (pageNumber === DOTS)
+        {
           return (
             <li key={`page-${i}`} className={twMerge(itemClass, dotsClass)}>
               &#8230;

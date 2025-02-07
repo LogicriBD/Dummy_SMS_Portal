@@ -1,6 +1,7 @@
 import { JWTAuthConfig, createJWTAuthProvider } from 'next-jwt-auth'
 import { useContext } from 'react'
 import { LoggedInUser } from '@/types/auth'
+import { toast } from 'react-toastify'
 
 export const authConfig: JWTAuthConfig = {
   apiBaseUrl: process.env.API_BASE_URL!,
@@ -47,7 +48,7 @@ export const authConfig: JWTAuthConfig = {
     login: { url: '/auth/login', method: 'post' },
     logout: { url: '/auth/logout', method: 'post' },
     refresh: { url: '/auth/refresh-token', method: 'post' },
-    user: { url: '/user/fetch', method: 'get' },
+    user: { url: '/users/fetch', method: 'get' },
   },
   /**
    * This is the NextJS route for your login page.
@@ -81,7 +82,6 @@ export const { JWTAuthContext, JWTAuthProvider } = createJWTAuthProvider<LoggedI
  */
 export const useJWTAuthContext = () => {
   const context = useContext(JWTAuthContext)
-
   if (!context) {
     throw new Error('JWTAuthContext not found, please check the provider')
   }
