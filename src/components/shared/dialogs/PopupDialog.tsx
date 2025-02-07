@@ -1,4 +1,4 @@
-import { useWindowSize } from '@/hooks/utils/WindowSize'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { secondary } from '@/styles/colors'
 import { Dialog, DialogPanel, DialogTitle, Transition } from '@headlessui/react'
 import classNames from 'classnames'
